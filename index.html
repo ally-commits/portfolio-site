@@ -52,7 +52,12 @@
 
       gtag('config', 'UA-146945168-1');
     </script>
-
+    <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function() {
+      emailjs.init("user_qvHyeYjgweM6QlONTGUG8");
+    })();
+    </script>
   </head>
 
   <body>
@@ -422,11 +427,29 @@
                   </div>
                   <div class="resume-items">
                     <div class="resume-item border-line-h active">
-                      <div class="date">2019 - Present</div>
-                      <div class="name">Web Developer</div>
-                      <div class="company">Techope Solutions.</div>
+                      <div class="date">2020-Oct - Present</div>
+                      <div class="name">Full Stack Engineer</div>
+                      <div class="company">Applore Technologies.</div>
                       <p>
-                        Working as Web Developer at siona solutions as a
+                        Working as Full Stack Enginner at Applore Technologies 
+                      </p>
+                    </div>
+                    
+                    <div class="resume-item border-line-h">
+                      <div class="date">2020-June - 2020-Oct</div>
+                      <div class="name">Front-end React Developer</div>
+                      <div class="company">Elocals India</div>
+                      <p>
+                        Worked as Front-end Developer at elocals india
+                      </p>
+                    </div>
+
+                    <div class="resume-item border-line-h">
+                      <div class="date">2019 - 2020/June</div>
+                      <div class="name">Web Developer</div>
+                      <div class="company">Techope Solutions</div>
+                      <p>
+                        Worked as Web Developer at Techope solutions as a
                         part-time job
                       </p>
                     </div>
@@ -536,15 +559,15 @@
                     </div>
                     <ul>
                       <li class="border-line-h">
-                        <div class="name">MongoDb / Firebase</div>
+                        <div class="name">MongoDb / Firebase / SQl</div>
                         <div class="progress">
-                          <div class="percentage" style="width:70%;"></div>
+                          <div class="percentage" style="width:85%;"></div>
                         </div>
                       </li>
                       <li class="border-line-h">
                         <div class="name">React / Node</div>
                         <div class="progress">
-                          <div class="percentage" style="width:80%;"></div>
+                          <div class="percentage" style="width:95%;"></div>
                         </div>
                       </li>
                       <li>
@@ -556,7 +579,7 @@
                       <li>
                         <div class="name">PYTHON / DJANGO / MACHINE LEARNING</div>
                         <div class="progress">
-                          <div class="percentage" style="width:46%;"></div>
+                          <div class="percentage" style="width:60%;"></div>
                         </div>
                       </li>
                       <li>
@@ -568,7 +591,7 @@
                       <li>
                         <div class="name">Laravel</div>
                         <div class="progress">
-                          <div class="percentage" style="width:80%;"></div>
+                          <div class="percentage" style="width:85%;"></div>
                         </div>
                       </li>
                     </ul>
@@ -824,13 +847,17 @@
               <div class="row">
                 <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
                   <div class="contact_form">
-                    <form id="cform" method="post">
+                    <div class="alert-success">
+                      <p>Thanks, your message is sent successfully.</p>
+                    </div>
+                    <form id="aform" method="post">
                       <div class="row">
                         <div class="col col-d-6 col-t-6 col-m-12">
                           <div class="group-val">
                             <input
                               type="text"
                               name="name"
+                              id="name"
                               placeholder="Full Name"
                             />
                           </div>
@@ -840,6 +867,7 @@
                             <input
                               type="text"
                               name="email"
+                              id="email"
                               placeholder="Email Address"
                             />
                           </div>
@@ -849,6 +877,7 @@
                             <textarea
                               name="message"
                               placeholder="Your Message"
+                              id="message"
                             ></textarea>
                           </div>
                         </div>
@@ -857,7 +886,7 @@
                         <a
                           href="#"
                           class="button"
-                          onclick="$('#cform').submit(); return false;"
+                          onclick="sendMessage()"
                         >
                           <span class="text">Send Message</span>
                           <span class="arrow"></span>
@@ -898,5 +927,39 @@
       <div></div>
   </div>
     <script src="js/script.js"></script>
+
+    <script>
+      function sendMessage(e) { 
+        let name = document.getElementById("name");
+        let email = document.getElementById("email");
+        let message = document.getElementById("message");
+
+        if(name.value == "" || email.value == "" || message.value == "") {
+          if(name.value == "") {
+            name.classList.add("error");
+          } 
+          if(email.value == "") {
+            email.classList.add("error");
+          }
+          if(message.value == "") {
+            message.classList.add("error");
+          } 
+        } else {
+          emailjs.send("service_wqfe8tn","template_72fkjaf",{
+            from_name: name.value,
+            name: name.value,
+            email: email.value,
+            message: message.value,
+            reply_to: "noreply@one.com",
+          });
+          
+          name.value = "";
+          email.value = "";
+          message.value = "";
+
+          document.querySelector(".alert-success").style.display = 'flex';
+        }
+      }  
+    </script>
   </body>
 </html>
